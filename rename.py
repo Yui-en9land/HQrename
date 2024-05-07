@@ -28,5 +28,5 @@ player_file = 'players.txt'
 # 出力テキストファイル名
 output_file = 'timestamps_rename.txt'
 
-# Playerをsatoに置換して新しいテキストファイルを作成
+# Playerを置換して新しいテキストファイルを作成
 replace_player(input_file, output_file, player_file)
