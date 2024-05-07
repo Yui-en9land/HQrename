@@ -1,3 +1,6 @@
+# 各試合毎のPlayer1とPlayer2の文字列をプレイヤーの名称に置換
+# 1試合1行でプレイヤーの名称がスペース区切りで記載されたplayers.txtを読み込み
+# 各試合の対戦キャラと対戦プレイヤー、試合結果に反映する
 def replace_player(input_file, output_file, player_file):
     with open(input_file, 'r') as f_in:
         with open(player_file, 'r') as p_in:
