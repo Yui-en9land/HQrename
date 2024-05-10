@@ -74,8 +74,9 @@ with open(player_file, 'r') as p_in:
     line = p_in.readline()
     sprit = line.split()
     if sprit[0] == 'M01:':
+        # BOT自動生成用
         player_list = replace_formal(player_file, replace_info)
         replace_playerlist(input_file, output_file, player_list)
     else:
-        replace_formal(player_file, replace_info)
+        # 手動生成用
         replace_player(input_file, output_file, player_file)
