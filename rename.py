@@ -12,12 +12,16 @@ def replace_formal(player_file, replace_info):
             player_lines = player_in.readlines()
             info_lines = info_in.readlines()
             for player_index in player_lines:
-                player_split = player_lines.split()
+                player_split = player_index.split()
                 for info_index in info_lines:
-                    player1 = player_split[1].replace(info_index[0], info_index[1])
-                    player2 = player_split[3].replace(info_index[0], info_index[1])
-                    players_list.append([player1, player2])
-                    return players_list
+                    info_split = info_index.split(',')
+                    player_index = player_index.replace(info_split[0], info_split[1])
+                    player_index = player_index.replace('\n', '')
+                    player_index = player_index.replace(info_split[0], info_split[1])
+                    player_index = player_index.replace('\n', '')
+                player_split = player_index.split()
+                players_list.append([player_split[1], player_split[3]])
+    return players_list
 def replace_player(input_file, output_file, player_file):
     with open(input_file, 'r') as f_in:
         with open(player_file, 'r') as p_in:
@@ -37,17 +41,19 @@ def replace_player(input_file, output_file, player_file):
                     f_out.write(lines[i+1])
 
 def replace_playerlist(input_file, output_file, players_list):
+    player_index = 0
     with open(input_file, 'r') as f_in:
         with open(output_file, 'w') as f_out:
             lines = f_in.readlines()
             for i in range(0, len(lines), 2):
                 # 1行目と2行目の両方にPlayerが含まれている場合に置換
                 if 'Player1' in lines[i] or 'Player1' in lines[i+1]:
-                    lines[i] = lines[i].replace('Player1', players_list[0])
-                    lines[i+1] = lines[i+1].replace('Player1', players_list[0])
+                    lines[i] = lines[i].replace('Player1', players_list[player_index][0])
+                    lines[i+1] = lines[i+1].replace('Player1', players_list[player_index][0])
                 if 'Player2' in lines[i] or 'Player2' in lines[i+1]:
-                    lines[i] = lines[i].replace('Player2', players_list[1])
-                    lines[i+1] = lines[i+1].replace('Player2', players_list[1])
+                    lines[i] = lines[i].replace('Player2', players_list[player_index][1])
+                    lines[i+1] = lines[i+1].replace('Player2', players_list[player_index][1])
+                    player_index += 1
                 f_out.write(lines[i])
                 f_out.write(lines[i+1])
 
@@ -68,8 +74,8 @@ with open(player_file, 'r') as p_in:
     line = p_in.readline()
     sprit = line.split()
     if sprit[0] == 'M01:':
-        replace_formal(player_file, replace_info)
-        replace_player(input_file, output_file, player_file)
+        player_list = replace_formal(player_file, replace_info)
+        replace_playerlist(input_file, output_file, player_list)
     else:
         replace_formal(player_file, replace_info)
         replace_player(input_file, output_file, player_file)
