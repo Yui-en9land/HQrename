@@ -76,7 +76,7 @@ def replace_playerlist(input_file, output_file, players_list):
                     player_index += 1
                 f_out.write(lines[i])
                 f_out.write(lines[i+1])
-            f_out.write('#hellishquart')
+            f_out.write('\n#hellishquart')
 
 # timestampファイル名
 input_file = filedialog.askopenfilename(title="タイムスタンプファイルを選択")
