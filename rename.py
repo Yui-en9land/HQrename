@@ -9,10 +9,11 @@ import calendar
 players_name_en = []
 players_name_jp = []
 
+
 def replace_formal(player_file, replace_info):
     players_list = []
     with open(player_file, 'r', encoding='utf-8') as player_in:
-        with open(replace_info, 'r') as info_in:
+        with open(replace_info, 'r', encoding='utf-8') as info_in:
             player_lines = player_in.readlines()
             info_lines = info_in.readlines()
             for player_index in player_lines:
@@ -43,9 +44,9 @@ def replace_formal(player_file, replace_info):
                     players_name_jp.append(jp_name)
     return players_list, players_name_en, players_name_jp
 def replace_player(input_file, output_file, player_file):
-    with open(input_file, 'r') as f_in:
-        with open(player_file, 'r') as p_in:
-            with open(output_file, 'w') as f_out:
+    with open(input_file, 'r', encoding='utf-8') as f_in:
+        with open(player_file, 'r', encoding='utf-8') as p_in:
+            with open(output_file, 'w', encoding='utf-8') as f_out:
                 lines = f_in.readlines()
                 for i in range(0, len(lines), 2):
                     player_line = p_in.readline()
@@ -62,8 +63,8 @@ def replace_player(input_file, output_file, player_file):
 
 def replace_playerlist(input_file, output_file, players_list):
     player_index = 0
-    with open(input_file, 'r') as f_in:
-        with open(output_file, 'a') as f_out:
+    with open(input_file, 'r', encoding='utf-8') as f_in:
+        with open(output_file, 'a', encoding='utf-8') as f_out:
             lines = f_in.readlines()
             for i in range(0, len(lines), 2):
                 # 1行目と2行目の両方にPlayerが含まれている場合に置換
@@ -105,9 +106,9 @@ with open(player_file, 'r', encoding='utf-8') as p_in:
     if sprit[0] == 'M01:':
         # BOT自動生成用
         [player_list, players_name_en, players_name_jp] = replace_formal(player_file, replace_info)
-        with open(youtube_comment, 'r') as yfile:
+        with open(youtube_comment, 'r', encoding='utf-8') as yfile:
             comment = yfile.readlines()
-        with open(output_file_en, 'w') as f_out:
+        with open(output_file_en, 'w', encoding='utf-8') as f_out:
             title = ('[Hellish Quart PvP] ' + calendar.month_abbr[int(month)] + '-' + day + '-' + year)
             date = datetime.date(int(year), int(month), int(day))
             if date.weekday() == 5:
@@ -122,7 +123,7 @@ with open(player_file, 'r', encoding='utf-8') as p_in:
                 f_out.write(' - ' + name + '\n')
             f_out.write('\n')
         replace_playerlist(input_file, output_file_en, player_list)
-        with open(output_file_jp, 'w') as f_out:
+        with open(output_file_jp, 'w', encoding='utf-8') as f_out:
             title = ('[Hellish Quart PvP] ' + year + '-' + month + '-' + day)
             date = datetime.date(int(year), int(month), int(day))
             if date.weekday() == 5:
