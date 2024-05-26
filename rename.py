@@ -114,9 +114,11 @@ with open(player_file, 'r', encoding='utf-8') as p_in:
             if date.weekday() == 5:
                 f_out.write(title + ' Weekly Sparring\n\n')
                 f_out.write('\n')
+                f_out.write(comment[0].replace('@n', '\n'))
             else:
                 f_out.write(title + ' Sparring\n')
                 f_out.write('\n')
+                f_out.write(comment[1].replace('@n', '\n'))
             for name in players_name_en:
                 f_out.write(' - ' + name + '\n')
             f_out.write('\n')
@@ -127,9 +129,11 @@ with open(player_file, 'r', encoding='utf-8') as p_in:
             if date.weekday() == 5:
                 f_out.write(title + ' 週例オンライン対戦会\n')
                 f_out.write('\n')
+                f_out.write(comment[2].replace('@n', '\n'))
             else:
                 f_out.write(title + ' 道場マッチ\n')
                 f_out.write('\n')
+                f_out.write(comment[3].replace('@n', '\n'))
             for name in players_name_jp:
                 f_out.write(' - ' + name + '\n')
             f_out.write('\n')
